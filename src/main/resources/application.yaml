@@ -1,0 +1,29 @@
+spring:
+  config:
+    import: optional:configserver:${CONFIG_SERVER_URI:http://localhost:8888}
+  main:
+    web-application-type: reactive
+  cloud:
+    compatibility-verifier:
+      enabled: false
+    gateway:
+      routes:
+        - id: profiles-microservice
+          uri: ${PROFILES_ROUTE_URI:http://localhost:8081/}
+          predicates:
+            - Path=/api/v1/profiles/**
+        - id: subscription-service
+          uri: ${SUBSCRIPTIONS_ROUTE_URI:http://localhost:8082/}
+          predicates:
+            - Path=/api/v1/subscriptions/**
+
+management:
+  endpoints:
+    web:
+      exposure:
+        include: "*"
+  endpoint:
+    health:
+      show-details: always
+    gateway:
+      enabled: true
