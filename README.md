@@ -2,10 +2,13 @@
 
 http://localhost:8080/actuator
 
-eureka server (register) 8761
-config server 8888
-api gateway 8060
-profiles 8081
+- eureka server (register) 8761
+
+- config server 8888
+
+- api gateway 8060
+
+- profiles 8081
 
 Api gateway connections 
 
