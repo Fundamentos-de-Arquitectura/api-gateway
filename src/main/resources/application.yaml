@@ -6,16 +6,13 @@ spring:
   cloud:
     compatibility-verifier:
       enabled: false
-    gateway:
-      routes:
-        - id: profiles-microservice
-          uri: ${PROFILES_ROUTE_URI:http://localhost:8081/}
-          predicates:
-            - Path=/api/v1/profiles/**
-        - id: subscription-service
-          uri: ${SUBSCRIPTIONS_ROUTE_URI:http://localhost:8082/}
-          predicates:
-            - Path=/api/v1/subscriptions/**
+
+eureka:
+  client:
+    register-with-eureka: true
+    fetch-registry: true
+    service-url:
+      defaultZone: http://localhost:8761/eureka/
 
 management:
   endpoints:
