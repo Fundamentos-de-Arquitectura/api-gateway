@@ -1,18 +1,68 @@
 spring:
-  config:
-    import: optional:configserver:${CONFIG_SERVER_URI:http://localhost:8888}
+  application:
+    name: ${SPRING_APPLICATION_NAME:api-gateway}
   main:
     web-application-type: reactive
   cloud:
+    config:
+      enabled: false
     compatibility-verifier:
       enabled: false
+    gateway:
+      discovery:
+        locator:
+          enabled: ${EUREKA_ENABLED:false}
+          lower-case-service-id: true
+      routes:
+        - id: iam-authentication
+          uri: ${IAM_SERVICE_URL:lb://iam-microservice}
+          predicates:
+            - Path=/api/v1/authentication/**
+        - id: iam-accounts
+          uri: ${IAM_SERVICE_URL:lb://iam-microservice}
+          predicates:
+            - Path=/api/v1/accounts/**
+        - id: profiles-service
+          uri: ${PROFILES_SERVICE_URL:lb://profiles-service}
+          predicates:
+            - Path=/api/v1/profiles/**
+        - id: menu-service
+          uri: ${MENU_SERVICE_URL:lb://menu-service}
+          predicates:
+            - Path=/api/v1/menu/**
+        - id: inventory-products
+          uri: ${INVENTORY_SERVICE_URL:lb://inventory-service}
+          predicates:
+            - Path=/api/v1/products/**
+        - id: inventory-service
+          uri: ${INVENTORY_SERVICE_URL:lb://inventory-service}
+          predicates:
+            - Path=/api/v1/inventory/**
+        - id: orders-service
+          uri: ${ORDERS_SERVICE_URL:lb://orders-service}
+          predicates:
+            - Path=/api/v1/orders/**
+        - id: subscription-service
+          uri: ${SUBSCRIPTION_SERVICE_URL:lb://subscription-service}
+          predicates:
+            - Path=/api/v1/subscriptions/**
 
 eureka:
   client:
-    register-with-eureka: true
-    fetch-registry: true
+    enabled: ${EUREKA_ENABLED:true}
+    register-with-eureka: ${EUREKA_ENABLED:true}
+    fetch-registry: ${EUREKA_ENABLED:true}
     service-url:
-      defaultZone: http://localhost:8761/eureka/
+      defaultZone: ${EUREKA_CLIENT_SERVICEURL_DEFAULTZONE:http://localhost:8761/eureka/}
+  instance:
+    hostname: ${WEBSITE_HOSTNAME:${EUREKA_INSTANCE_HOSTNAME:localhost}}
+    prefer-ip-address: false
+    secure-port-enabled: true
+    non-secure-port: 80
+    secure-port: 443
+    home-page-url: https://${eureka.instance.hostname}/
+    status-page-url: https://${eureka.instance.hostname}/actuator/info
+    health-check-url: https://${eureka.instance.hostname}/actuator/health
 
 management:
   endpoints:

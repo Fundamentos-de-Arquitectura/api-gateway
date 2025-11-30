@@ -1,0 +1,62 @@
+[
+    {
+        "name": "EUREKA_ENABLED",
+        "value": "true",
+        "slotSetting": false
+    },
+    {
+        "name": "EUREKA_CLIENT_SERVICEURL_DEFAULTZONE",
+        "value": "https://foodflow-service-registry.azurewebsites.net/eureka/",
+        "slotSetting": false
+    },
+    {
+        "name": "WEBSITES_PORT",
+        "value": "8060",
+        "slotSetting": false
+    },
+    {
+        "name": "IAM_SERVICE_URL",
+        "value": "https://iam-microservice-app.azurewebsites.net",
+        "slotSetting": false
+    },
+    {
+        "name": "PROFILES_SERVICE_URL",
+        "value": "https://profiles-microservice-app.azurewebsites.net",
+        "slotSetting": false
+    },
+    {
+        "name": "MENU_SERVICE_URL",
+        "value": "https://menu-microservice-app.azurewebsites.net",
+        "slotSetting": false
+    },
+    {
+        "name": "INVENTORY_SERVICE_URL",
+        "value": "https://inventory-microservice-app.azurewebsites.net",
+        "slotSetting": false
+    },
+    {
+        "name": "ORDERS_SERVICE_URL",
+        "value": "https://orders-microservice-app.azurewebsites.net",
+        "slotSetting": false
+    },
+    {
+        "name": "SUBSCRIPTION_SERVICE_URL",
+        "value": "https://subscription-microservice-app.azurewebsites.net",
+        "slotSetting": false
+    },
+    {
+        "name": "WEBSITE_HOSTNAME",
+        "value": "foodflow-api-gateway.azurewebsites.net",
+        "slotSetting": false
+    },
+    {
+        "name": "EUREKA_INSTANCE_HOSTNAME",
+        "value": "foodflow-api-gateway.azurewebsites.net",
+        "slotSetting": false
+    },
+    {
+        "name": "SPRING_APPLICATION_NAME",
+        "value": "api-gateway",
+        "slotSetting": false
+    }
+]
